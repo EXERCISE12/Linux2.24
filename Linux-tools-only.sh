@@ -24,7 +24,8 @@ read install_docker_answer
 if [[ "$install_docker_answer" == "yes" ]]; then
   echo "Which system are you installing Docker on?"
   echo "1. Ubuntu"
-  echo "2. Debian"
+  echo "2. Ubuntu distro ex: Linux Mint"
+  echo "3. Debian"
   read os_choice
   
   # Cleanup before Docker installation
@@ -42,12 +43,25 @@ if [[ "$install_docker_answer" == "yes" ]]; then
     # Add the repository to Apt sources:
     echo \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  elif [[ "$os_choice" == "2" ]]; then
+    # Add Docker's official GPG key:
+    sudo apt-get update
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    # Add the repository to Apt sources:
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
     $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-  
-  elif [[ "$os_choice" == "2" ]]; then
+  elif [[ "$os_choice" == "3" ]]; then
     # Docker installation commands for Debian
     sudo apt-get update
     sudo apt-get install ca-certificates curl
