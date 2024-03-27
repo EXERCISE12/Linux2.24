@@ -211,7 +211,7 @@ fi
 echo "Installing Font Awesome"
 nala install -y fonts-font-awesome 
 
-echo "Installing Cascadia Cove Nerd Font and setting up as default font for terminator"
+echo "Installing CascadiaCove Nerd Font and setting up as default font for terminator"
 
 # Create a directory for local fonts if it doesn't exist
 mkdir -p ~/.local/share/fonts
@@ -219,8 +219,17 @@ mkdir -p ~/.local/share/fonts
 wget -O ~/cascadia-code-nerd-font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
 # Unzip the font files to the local fonts directory
 unzip ~/cascadia-code-nerd-font.zip -d ~/.local/share/fonts
+# Download Firecode Font
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
+unzip FiraCode.zip -d ~/.local/share/fonts
+# Download Meslo Font
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Meslo.zip
+unzip Meslo.zip -d ~/.local/share/fonts
+mv dotfonts/fontawesome/otfs/*.otf ~/.local/share/fonts
+chown $username:$username ~/.local/share/fonts
 # Remove the downloaded zip file
-rm ~/cascadia-code-nerd-font.zip
+rm ~/cascadia-code-nerd-font.zip ~/FiraCode.zip ~/Meslo.zip
+
 
 # Refresh the font cache
 fc-cache -fv
