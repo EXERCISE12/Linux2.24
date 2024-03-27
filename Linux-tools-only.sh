@@ -19,7 +19,7 @@ fi
 
 #Install Docker 
 echo "Do you want to install Docker? (yes/no)"
-read install_docker_answer
+read -t 10 install_docker_answer || echo "Skipping Docker installation due to no response."
 
 if [[ "$install_docker_answer" == "yes" ]]; then
   echo "Which system are you installing Docker on?"
