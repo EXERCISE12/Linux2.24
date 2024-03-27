@@ -237,25 +237,26 @@ EOF
 
 fi
 
-echo "Installing Cascadia Cove Nerd Font and setting up as default font form terminator"
+#--------------------------------------------------
+# Installing fonts
+#--------------------------------------------------
+echo "Installing Font Awesome"
+nala install -y fonts-font-awesome 
+
+echo "Installing Cascadia Cove Nerd Font and setting up as default font for terminator"
 
 # Create a directory for local fonts if it doesn't exist
 mkdir -p ~/.local/share/fonts
-
 # Download Cascadia Cove Nerd Font
 wget -O ~/cascadia-code-nerd-font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
-
 # Unzip the font files to the local fonts directory
 unzip ~/cascadia-code-nerd-font.zip -d ~/.local/share/fonts
-
 # Remove the downloaded zip file
 rm ~/cascadia-code-nerd-font.zip
 
 # Refresh the font cache
 fc-cache -fv
-
 sed -i '/^\[\[default\]\]/!b;n;s/font = .*/font = Cascadia Code 12/' ~/.config/terminator/config
-
 
 echo "Cascadia Cove Nerd Font installed successfully."
 
