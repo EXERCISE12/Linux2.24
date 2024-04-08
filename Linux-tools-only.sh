@@ -4,9 +4,12 @@
 sudo -v
 while true; do sudo -n true; sleep 60; done &>/dev/null &
 
+#--------------------------------------------------
+# Install essential terminal tools
+#--------------------------------------------------
 # Batch install essential packages with improved error handling
-sudo apt update
-sudo apt install -y nala apt-transport-https curl cargo || {
+sudo apt update && sudo apt upgrade -y 
+sudo apt install -y nala apt-transport-https curl cargo ca-certificates || {
   echo "Error: Failed to install essential packages. Exiting..."
   exit 1
 }
@@ -17,7 +20,9 @@ if ! sudo nala install -y flameshot psmisc papirus-icon-theme fonts-noto-color-e
   echo "Failed to install some command-line tools with Nala. Continuing..."
 fi
 
-#Install Docker 
+#--------------------------------------------------
+#Install Docker
+#--------------------------------------------------
 echo "Do you want to install Docker? (yes/no)"
 read -t 10 install_docker_answer || echo "Skipping Docker installation due to no response."
 
@@ -34,9 +39,9 @@ if [[ "$install_docker_answer" == "yes" ]]; then
   done
 
   if [[ "$os_choice" == "1" ]]; then
+    # Docker installation commands for Ubuntu
     # Add Docker's official GPG key:
     sudo apt-get update
-    sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -46,11 +51,10 @@ if [[ "$install_docker_answer" == "yes" ]]; then
     $(. /etc/os-release && echo "$VERSION_CODENAME_CODENAME") stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo nala install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   elif [[ "$os_choice" == "2" ]]; then
-    # Add Docker's official GPG key:
+    # Docker installation commands for Ubuntu distro ex: Linux Mint
     sudo apt-get update
-    sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -60,18 +64,17 @@ if [[ "$install_docker_answer" == "yes" ]]; then
     $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo nala install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   elif [[ "$os_choice" == "3" ]]; then
     # Docker installation commands for Debian
     sudo apt-get update
-    sudo apt-get install ca-certificates curl
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
 
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo nala install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   else
     echo "Invalid option. Exiting..."
     exit 1
@@ -80,7 +83,6 @@ if [[ "$install_docker_answer" == "yes" ]]; then
 # Post-installation steps to use Docker as a non-root user (optional for both Ubuntu and Debian)
   sudo usermod -aG docker $USER
   
-
   echo "Docker installed successfully."
 else
   echo "Docker installation skipped."
@@ -97,8 +99,8 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
     echo
 
     if [[ "$OS" == "Linux" ]]; then
-        echo -e "n→ Installing zsh, bat, and git"
-        sudo apt install zsh bat git -y &> /dev/null
+        echo -e "Installing zsh, bat, and git"
+        sudo nala install zsh bat git -y &> /dev/null
     fi
 
     if [[ "$OS" == "Darwin" ]]; then
@@ -154,8 +156,8 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
       sudo cp -r /home/"$(whoami)"/.p10k.zsh /root
     fi
 
-    echo -e "\nInstallation Finished"
-    echo -e "\n→ You may need to reopen the terminal if the theme doesn't load automatically."
+    echo -e "Installation Finished"
+    echo -e "You may need to reopen the terminal if the theme doesn't load automatically."
 
 
     # Ensure the ~/.zsh directory exists
@@ -185,11 +187,11 @@ cat <<EOF >> ~/.zshrc
     function cheat {
             curl cht.sh/\$1
     }
+    # mkdir and cd into it
+    mcd() { mkdir -p "\$1"; cd "\$1";}
 
     # PERSONAL ALIAS
     alias ls="exa --icons"
-    # mkdir and cd into it
-    mcd() { mkdir -p "\$1"; cd "\$1";}
     # temp dir
     alias tmpd="cd \$(mktemp -d)"
     # alias batcat
@@ -209,9 +211,9 @@ fi
 # Installing fonts
 #--------------------------------------------------
 echo "Installing Font Awesome"
-nala install -y fonts-font-awesome 
+sudo nala install -y fonts-font-awesome 
 
-echo "Installing CascadiaCove Nerd Font and setting up as default font for terminator"
+echo "Installing Cascadia Cove Nerd Font and setting up as default font for terminator"
 
 # Create a directory for local fonts if it doesn't exist
 mkdir -p ~/.local/share/fonts
@@ -219,24 +221,14 @@ mkdir -p ~/.local/share/fonts
 wget -O ~/cascadia-code-nerd-font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaCode.zip
 # Unzip the font files to the local fonts directory
 unzip ~/cascadia-code-nerd-font.zip -d ~/.local/share/fonts
-# Download Firecode Font
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
-unzip FiraCode.zip -d ~/.local/share/fonts
-# Download Meslo Font
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Meslo.zip
-unzip Meslo.zip -d ~/.local/share/fonts
-mv dotfonts/fontawesome/otfs/*.otf ~/.local/share/fonts
-chown $username:$username ~/.local/share/fonts
 # Remove the downloaded zip file
-rm ~/cascadia-code-nerd-font.zip ~/FiraCode.zip ~/Meslo.zip
-
+rm ~/cascadia-code-nerd-font.zip
 
 # Refresh the font cache
 fc-cache -fv
 sed -i '/^\[\[default\]\]/!b;n;s/font = .*/font = Cascadia Code 12/' ~/.config/terminator/config
 
 echo "Cascadia Cove Nerd Font installed successfully."
-
 
 # Reload Zsh shell to apply changes
 echo "Reloading Zsh shell to apply changes..."
