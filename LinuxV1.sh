@@ -8,7 +8,7 @@ while true; do sudo -n true; sleep 60; done &>/dev/null &
 # Install essential terminal tools
 #--------------------------------------------------
 # Batch install essential packages with improved error handling
-sudo apt update
+sudo apt update && sudo apt upgrade -y 
 sudo apt install -y nala apt-transport-https curl cargo || {
   echo "Error: Failed to install essential packages. Exiting..."
   exit 1
@@ -114,7 +114,7 @@ sudo apt update && sudo apt install brave-browser -y || echo "Failed to install 
 echo "Installing Floorp browser"
 curl -fsSL https://ppa.ablaze.one/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
 sudo curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
-sudo apt update && sudo apt install floorp
+sudo apt update && sudo nala install floorp -y
 
 # Install Spotify
 echo "Installing Spotify..."
@@ -249,7 +249,7 @@ fi
 # Installing fonts
 #--------------------------------------------------
 echo "Installing Font Awesome"
-nala install -y fonts-font-awesome 
+sudo nala install -y fonts-font-awesome 
 
 echo "Installing Cascadia Cove Nerd Font and setting up as default font for terminator"
 
