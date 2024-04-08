@@ -20,7 +20,9 @@ if ! sudo nala install -y flameshot psmisc papirus-icon-theme fonts-noto-color-e
   echo "Failed to install some command-line tools with Nala. Continuing..."
 fi
 
-#Install Docker 
+#--------------------------------------------------
+#Install Docker
+#--------------------------------------------------
 echo "Do you want to install Docker? (yes/no)"
 read -t 10 install_docker_answer || echo "Skipping Docker installation due to no response."
 
