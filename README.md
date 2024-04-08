@@ -2,7 +2,7 @@
 
 Scripts for install various linux tools in a new system without effort
 
-🛠️ Work in progres / ⏳️Next Update⏳️:
+🛠️ Work in progres / ⏳️Next Updates⏳️:
 
 - Merge two scripts, implementing a control to choose whether to install only tools or full installation
 - Add other useful programmes for a desktop user
