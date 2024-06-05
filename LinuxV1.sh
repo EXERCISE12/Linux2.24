@@ -237,6 +237,9 @@ cat <<EOF >> ~/.zshrc
     alias fd="fdfind"
     # empty trash
     alias et="rm -rf  ~/.local/share/Trash/* "
+    #Pbcopy/Pbpaste
+    alias pbcopy="xsel --input --clipboard"
+    alias pbpaste="xsel --output --clipboard"
 
 EOF
 
