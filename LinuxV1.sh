@@ -91,7 +91,13 @@ fi
 # Install Applications
 #--------------------------------------------------
 #
-sudo nala install copyq timeshift -y
+sudo nala install copyq timeshift neovim -y
+
+# Install Nvim + LazyvimIDE
+echo "Installing NeoVIM + LazyVIM..."
+mv ~/.config/nvim{,.bak}
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
 
 # Install Thorium Browser
 echo "Installing Thorium Browser..."
