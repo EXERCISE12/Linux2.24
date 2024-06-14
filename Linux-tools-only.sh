@@ -238,9 +238,42 @@ unzip ~/cascadia-code-nerd-font.zip -d ~/.local/share/fonts
 # Remove the downloaded zip file
 rm ~/cascadia-code-nerd-font.zip
 
+#Terminator various configuration 
+echo "Installing and Config Terminator Theme"
+mkdir -p ~/.config/terminator/
+cat <<EOF >> ~/.config/terminator/config
+[global_config]
+[keybindings]
+[profiles]
+  [[default_old]]
+    font = CaskaydiaCove Nerd Font 13
+    foreground_color = "#00ff00"
+    scrollback_lines = 2000
+    palette = "#000000:#ed333b:#2ec27e:#b5835a:#1c71d8:#a347ba:#33c7de:#d0cfcc:#5e5c64:#ff5555:#55ff55:#f6d32d:#62a0ea:#dc8add:#33c7de:#ffffff"
+    use_system_font = False
+  [[default]]
+    #catpuccino-frappe
+    background_color = "#303446"
+    background_image = None
+    font = CaskaydiaCove Nerd Font 12
+    foreground_color = "#c6d0f5"
+    palette = "#51576d:#e78284:#a6d189:#e5c890:#8caaee:#f4b8e4:#81c8be:#b5bfe2:#626880:#e78284:#a6d189:#e5c890:#8caaee:#f4b8e4:#81c8be:#a5adce"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+[plugins]
+EOF
+
 # Refresh the font cache
 fc-cache -fv
-sed -i '/^\[\[default\]\]/!b;n;s/font = .*/font = Cascadia Code 12/' ~/.config/terminator/config
+sed -i '/^\[\[default\]\]/!b;n;s/font = .*/font = Cascadia Code 13/' ~/.config/terminator/config
 
 echo "Cascadia Cove Nerd Font installed successfully."
 
