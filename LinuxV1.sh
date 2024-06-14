@@ -91,10 +91,14 @@ fi
 # Install Applications
 #--------------------------------------------------
 #
-sudo nala install copyq timeshift neovim -y
+sudo nala install copyq timeshift -y
 
 # Install Nvim + LazyvimIDE
+
 echo "Installing NeoVIM + LazyVIM..."
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+sudo rm -rf /opt/nvim
+sudo tar -C /opt -xzf nvim-linux64.tar.gz
 mv ~/.config/nvim{,.bak}
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
@@ -246,6 +250,8 @@ cat <<EOF >> ~/.zshrc
     #Pbcopy/Pbpaste
     alias pbcopy="xsel --input --clipboard"
     alias pbpaste="xsel --output --clipboard"
+
+    export PATH="$PATH:/opt/nvim-linux64/bin"
 
 EOF
 
