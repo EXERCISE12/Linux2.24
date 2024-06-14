@@ -16,7 +16,7 @@ sudo apt install -y nala apt-transport-https curl cargo ca-certificates || {
 
 # Use Nala for batch installation of command-line tools
 echo "Installing command-line tools with Nala..."
-if ! sudo nala install -y flameshot psmisc papirus-icon-theme fonts-noto-color-emoji htop neofetch ncdu tree fzf ripgrep bat exa tmux terminator fd-find nmap pipx xsel zip; then
+if ! sudo nala install -y flameshot psmisc papirus-icon-theme fonts-noto-color-emoji htop neofetch ncdu tree fzf ripgrep bat exa tmux terminator fd-find nmap pipx xsel zip git; then
   echo "Failed to install some command-line tools with Nala. Continuing..."
 fi
 
@@ -96,10 +96,10 @@ sudo nala install copyq timeshift -y
 # Install Nvim + LazyvimIDE
 
 echo "Installing NeoVIM + LazyVIM..."
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-sudo rm -rf /opt/nvim
-sudo tar -C /opt -xzf nvim-linux64.tar.gz
-mv ~/.config/nvim{,.bak}
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+sudo mkdir -p /opt/nvim
+sudo mv nvim.appimage /opt/nvim/nvim
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
 
