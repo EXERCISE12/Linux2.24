@@ -20,6 +20,16 @@ if ! sudo nala install -y pipx psmisc papirus-icon-theme fonts-noto-color-emoji 
   echo "Failed to install some command-line tools with Nala. Continuing..."
 fi
 
+# Install Nvim + LazyvimIDE
+
+echo "Installing NeoVIM + LazyVIM..."
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+sudo rm -rf /opt/nvim
+sudo tar -C /opt -xzf nvim-linux64.tar.gz
+mv ~/.config/nvim{,.bak}
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+
 #--------------------------------------------------
 #Install Docker
 #--------------------------------------------------
@@ -205,6 +215,9 @@ cat <<EOF >> ~/.zshrc
     #Pbcopy/Pbpaste
     alias pbcopy="xsel --input --clipboard"
     alias pbpaste="xsel --output --clipboard"
+
+
+
 EOF
 
 fi
