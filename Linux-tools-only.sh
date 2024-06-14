@@ -215,7 +215,7 @@ cat <<EOF >> ~/.zshrc
     alias pbcopy="xsel --input --clipboard"
     alias pbpaste="xsel --output --clipboard"
 
-
+    export PATH="$PATH:/opt/nvim"
 
 EOF
 
