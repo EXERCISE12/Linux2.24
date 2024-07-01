@@ -114,7 +114,7 @@ if [[ "$install_topgrade_answer" == "yes" ]]; then
         echo "Rustc is not installed. Proceeding..."
     fi
 
-    sudo nala install cargo -Y 
+    sudo nala install cargo -y 
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source $HOME/.cargo/env
     rustup install 1.79.0
