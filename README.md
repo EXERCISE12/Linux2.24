@@ -7,7 +7,7 @@ Scripts for install various linux tools in a new system without effort
 - ☐ Merge two scripts, implementing a control to choose whether to install only tools or full installation
 - 🗹 Add other useful programmes for a desktop user
     - Need to fix errors with Brave and Thorium GPG Keys
-- ☐ Add topgrade (with rustup update that solves compatibility problems)
+- 🗹 Add topgrade (with rustup update that solves compatibility problems)
 - ☐ Add colours for better readability of operations in progress (probably yellow for comments, red for errors and/or skipped sections, green for completed procedure)
 
 2 Different versions:

@@ -97,6 +97,36 @@ else
   echo "Docker installation skipped."
 fi
 
+#--------------------------------------------------
+# Install Topgrade
+#--------------------------------------------------
+echo "Do you want to install Topgrade? (yes/no)"
+read -t 10 install_topgrade_answer || echo "Skipping Topgrade installation due to no response."
+
+if [[ "$install_topgrade_answer" == "yes" ]]; then
+    echo "Installing Topgrade..."
+
+    # Check if rustc is installed and remove it if necessary
+    if which rustc > /dev/null; then
+        echo "Rustc is installed. Removing it..."
+        sudo nala remove rustc -y
+    else
+        echo "Rustc is not installed. Proceeding..."
+    fi
+
+    sudo nala install cargo -Y 
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source $HOME/.cargo/env
+    rustup install 1.79.0
+    rustup default 1.79.0
+    cargo install topgrade
+    export PATH=$PATH:/home/$USER/.cargo/bin 
+    echo "export PATH=\$PATH:/home/\$USER/.cargo/bin" >> ~/.zshrc
+    echo "Topgrade installed successfully."
+else
+    echo "Topgrade installation skipped."
+fi
+
 #
 #--------------------------------------------------
 # Install Zsh and Oh-My-Zsh without changing the default shell automatically
