@@ -16,7 +16,7 @@ sudo apt install -y nala apt-transport-https curl cargo ca-certificates || {
 
 # Use Nala for batch installation of command-line tools
 echo "Installing command-line tools with Nala..."
-if ! sudo nala install -y pipx psmisc papirus-icon-theme fonts-noto-color-emoji htop neofetch ncdu tree fzf ripgrep bat exa tmux terminator fd-find nmap xsel zip git; then
+if ! sudo nala install -y pipx psmisc papirus-icon-theme fonts-noto-color-emoji htop neofetch ncdu tree fzf ripgrep bat eza tmux terminator fd-find nmap xsel zip git; then
   echo "Failed to install some command-line tools with Nala. Continuing..."
 fi
 
@@ -230,7 +230,7 @@ cat <<EOF >> ~/.zshrc
     mcd() { mkdir -p "\$1"; cd "\$1";}
 
     # PERSONAL ALIAS
-    alias ls="exa --icons"
+    alias ls="eza --icons"
     # temp dir
     alias tmpd="cd \$(mktemp -d)"
     # alias batcat
