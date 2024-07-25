@@ -16,9 +16,38 @@ sudo apt install -y nala apt-transport-https curl cargo ca-certificates || {
 
 # Use Nala for batch installation of command-line tools
 echo "Installing command-line tools with Nala..."
-if ! sudo nala install -y flameshot psmisc papirus-icon-theme fonts-noto-color-emoji htop neofetch ncdu tree fzf ripgrep bat eza tmux terminator fd-find nmap pipx xsel zip git; then
-  echo "Failed to install some command-line tools with Nala. Continuing..."
-fi
+
+# Define the list of packages to install
+packages=(
+  flameshot
+  psmisc
+  papirus-icon-theme
+  fonts-noto-color-emoji
+  htop
+  neofetch
+  ncdu
+  tree
+  fzf
+  ripgrep
+  bat
+  eza
+  exa
+  tmux
+  terminator
+  fd-find
+  nmap
+  pipx
+  xsel
+  zip
+  git
+)
+
+# Loop through each package and attempt to install it
+for package in "${packages[@]}"; do
+  if ! sudo nala install -y "$package"; then
+    echo "Failed to install $package. Continuing with the next package..."
+  fi
+done
 
 #--------------------------------------------------
 #Install Docker
