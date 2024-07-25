@@ -296,7 +296,10 @@ cat <<EOF >> ~/.zshrc
     mcd() { mkdir -p "\$1"; cd "\$1";}
 
     # PERSONAL ALIAS
-    alias ls="eza --icons"
+    # fast shut & reboot
+    alias shut="sudo shutdown now"
+    alias reboot="sudo reboot now"
+    #alias ls="eza --icons"
     # temp dir
     alias tmpd="cd \$(mktemp -d)"
     # alias batcat
@@ -311,7 +314,7 @@ cat <<EOF >> ~/.zshrc
     alias pbcopy="xsel --input --clipboard"
     alias pbpaste="xsel --output --clipboard"
 
-export PATH="$PATH:/opt/nivm"
+    export PATH="$PATH:/opt/nivm"
 
 EOF
 
