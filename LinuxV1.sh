@@ -174,27 +174,22 @@ rm -rf ~/.config/nvim/.git
 # Install Thorium Browser
 echo "Installing Thorium Browser..."
 sudo rm -fv /etc/apt/sources.list.d/thorium.list &&
-  sudo wget --no-hsts -P /etc/apt/sources.list.d/ \
-    http://dl.thorium.rocks/debian/dists/stable/thorium.list &&
-  sudo apt update && sudo nala install thorium-browser -y || echo "Failed to install Thorium Browser. Continuing..."
+sudo wget --no-hsts -P /etc/apt/sources.list.d/ \
+http://dl.thorium.rocks/debian/dists/stable/thorium.list &&
+sudo apt update && sudo nala install thorium-browser -y || echo "Failed to install Thorium Browser. Continuing..."
 
 # Install Brave Browser
 echo "Installing Brave Browser..."
-sudo nala install apt-transport-https curl -y
-curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update && sudo nala install brave-browser -y || echo "Failed to install Brave Browser. Continuing..."
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-beta-archive-keyring.gpg https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-beta-archive-keyring.gpg] https://brave-browser-apt-beta.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-beta.list
+sudo nala update
+sudo nala install brave-browser-beta -y || echo "Failed to install Brave Browser. Continuing..."
 
 #Install Floorp (Firefox based)
 echo "Installing Floorp browser"
 curl -fsSL https://ppa.ablaze.one/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
 sudo curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
 sudo apt update && sudo nala install floorp -y
-
-#Install QuickEmu
-echo "Installing QuickEmu..."
-sudo apt-add-repository ppa:flexiondotorg/quickemu -y
-sudo nala install quickemu -y
 
 # Install Spotify
 echo "Installing Spotify..."
@@ -392,4 +387,3 @@ echo "Reloading Zsh shell to apply changes..."
 exec zsh
 
 echo "Installation and configuration complete!"
-
