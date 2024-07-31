@@ -26,7 +26,6 @@ packages=(
   curl
   cargo
   ca-certificates
-  flameshot
   psmisc
   papirus-icon-theme
   fonts-noto-color-emoji
@@ -48,6 +47,7 @@ packages=(
   xsel
   zip
   git
+  mc
 )
 
 # Loop through each package and attempt to install it
@@ -174,14 +174,14 @@ rm -rf ~/.config/nvim/.git
 # Install Thorium Browser
 echo "Installing Thorium Browser..."
 sudo rm -fv /etc/apt/sources.list.d/thorium.list &&
-sudo wget --no-hsts -P /etc/apt/sources.list.d/ \
-http://dl.thorium.rocks/debian/dists/stable/thorium.list &&
-sudo apt update && sudo nala install thorium-browser -y || echo "Failed to install Thorium Browser. Continuing..."
+  sudo wget --no-hsts -P /etc/apt/sources.list.d/ \
+    http://dl.thorium.rocks/debian/dists/stable/thorium.list &&
+  sudo apt update && sudo nala install thorium-browser -y || echo "Failed to install Thorium Browser. Continuing..."
 
 # Install Brave Browser
 echo "Installing Brave Browser..."
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-beta-archive-keyring.gpg https://brave-browser-apt-beta.s3.brave.com/brave-browser-beta-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-beta-archive-keyring.gpg] https://brave-browser-apt-beta.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-beta.list
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-beta-archive-keyring.gpg] https://brave-browser-apt-beta.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-beta.list
 sudo nala update
 sudo nala install brave-browser-beta -y || echo "Failed to install Brave Browser. Continuing..."
 
