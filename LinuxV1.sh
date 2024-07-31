@@ -48,6 +48,7 @@ packages=(
   zip
   git
   mc
+  pkg-config
 )
 
 # Loop through each package and attempt to install it
@@ -151,6 +152,13 @@ if [[ "$install_topgrade_answer" == "yes" ]]; then
   export PATH=$PATH:/home/$USER/.cargo/bin
   echo "export PATH=\$PATH:/home/\$USER/.cargo/bin" >>~/.zshrc
   echo "Topgrade installed successfully."
+  # Install other usuful cargo tools
+  echo "Installing Cargo Tools..."
+  cargo install cargo-cache
+  cargo install cargo-update
+  cargo install du-dust
+  cargo install atuin
+  echo "Cargo Tools installed successfully"
 else
   echo "Topgrade installation skipped."
 fi
@@ -162,7 +170,6 @@ fi
 sudo nala install copyq timeshift -y
 
 # Install Nvim + LazyvimIDE
-
 echo "Installing NeoVIM + LazyVIM..."
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
@@ -189,7 +196,8 @@ sudo nala install brave-browser-beta -y || echo "Failed to install Brave Browser
 echo "Installing Floorp browser"
 curl -fsSL https://ppa.ablaze.one/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/Floorp.gpg
 sudo curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.ablaze.one/Floorp.list'
-sudo apt update && sudo nala install floorp -y
+
+sudo apt update && sudo nala install floorp -y || echo "Failed to install Floorp. Continuing..."
 
 # Install Spotify
 echo "Installing Spotify..."
@@ -319,7 +327,9 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
     #Pbcopy/Pbpaste
     alias pbcopy="xsel --input --clipboard"
     alias pbpaste="xsel --output --clipboard"
-
+    
+    #Atuin shell plugin 
+    eval "$(atuin init zsh)"
     export PATH="$PATH:/opt/nivm"
 
 EOF
