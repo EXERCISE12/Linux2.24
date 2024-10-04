@@ -367,6 +367,13 @@ curl -fsSL https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/ki
 #Kitty Config file
 curl -fsSL https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/kitty/kitty.conf -o $HOME/.config/kitty/kitty.conf
 
+# Gnome-extensions Configurations
+echo "Setup Gnome-extensions configuration"
+mkdir -p $HOME/.local/share/gnome-shell/extensions/
+cd Linux2.24/config/extensions
+cp -r * $HOME/.local/share/gnome-shell/extensions
+cd $HOME 
+
 # Refresh the font cache
 fc-cache -fv
 sed -i '/^\[\[default\]\]/!b;n;s/font = .*/font = Cascadia Code 12/' ~/.config/terminator/config
