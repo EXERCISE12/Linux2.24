@@ -332,7 +332,7 @@ curl -fsSL https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/ki
 curl -fsSL https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/kitty/kitty.conf -o $HOME/.config/kitty/kitty.conf
 
 # Gnome-extensions Configurations need sheel reload to take effect (CTRL+F2   reload) 
-echo "Setup Gnome-extensions configuration"
+echo "Setup Gnome-extensions configuration need sheel reload to take effect (CTRL+F2   reload)"
 mkdir -p $HOME/.local/share/gnome-shell/extensions/
 cd && cd Linux2.24/config/extensions
 cp -r * $HOME/.local/share/gnome-shell/extensions

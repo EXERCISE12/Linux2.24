@@ -250,8 +250,8 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
 
   echo "Zsh plugin installation complete!"
 
-  # Gnome-extensions Configurations need sheel reload to take effect (CTRL+F2   reload) 
-  echo "Setup Gnome-extensions configuration"
+  # Gnome-extensions Configurations 
+  echo "Setup Gnome-extensions configuration need sheel reload to take effect (CTRL+F2   reload)"
   mkdir -p $HOME/.local/share/gnome-shell/extensions/
   cd && cd Linux2.24/config/extensions
   cp -r * $HOME/.local/share/gnome-shell/extensions
