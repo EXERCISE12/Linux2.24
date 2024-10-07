@@ -297,43 +297,9 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
 
   echo "Setting up personal Functions and Alias"
 
-  cat <<EOF >>~/.zshrc
+  echo "Setting up personal Functions and Alias"
+  curl -fsSl https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/zshrc -o $HOME/.zshrc
 
-    HIST_STAMPS="%Y-%m-%d %T "
-
-    ##FUNZIONI
-
-    # CHEATSHEET RAPIDA CMD
-    function cheat {
-            curl cht.sh/\$1
-    }
-    # mkdir and cd into it
-    mcd() { mkdir -p "\$1"; cd "\$1";}
-
-    # PERSONAL ALIAS
-    # fast shut & reboot
-    alias shut="sudo shutdown now"
-    alias reboot="sudo reboot now"
-    #alias ls="eza --icons"
-    # temp dir
-    alias tmpd="cd \$(mktemp -d)"
-    # alias batcat
-    alias cat="batcat"
-    # nala
-    alias nala="sudo nala"
-    # fdfind
-    alias fd="fdfind"
-    # empty trash
-    alias et="rm -rf  ~/.local/share/Trash/* "
-    #Pbcopy/Pbpaste
-    alias pbcopy="xsel --input --clipboard"
-    alias pbpaste="xsel --output --clipboard"
-    
-    #Atuin shell plugin 
-    eval "$(atuin init zsh)"
-    export PATH="$PATH:/opt/nivm"
-
-EOF
 
 fi
 

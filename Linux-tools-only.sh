@@ -21,6 +21,10 @@ sudo apt install -y nala apt-transport-https curl cargo ca-certificates || {
 echo "Installing command-line tools with Nala..."
 # Define the list of packages to install
 packages=(
+  apt-transport-https
+  curl
+  cargo
+  ca-certificates
   psmisc
   papirus-icon-theme
   fonts-noto-color-emoji
@@ -33,15 +37,18 @@ packages=(
   bat
   eza
   exa
-  tmux
   terminator
+  kitty
   fd-find
   nmap
+  python3
+  python3-pip
   pipx
   xsel
   zip
   git
   mc
+  pkg-config
 )
 
 # Loop through each package and attempt to install it
@@ -244,42 +251,7 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
   echo "Zsh plugin installation complete!"
 
   echo "Setting up personal Functions and Alias"
-
-  cat <<EOF >>~/.zshrc
-
-    HIST_STAMPS="%Y-%m-%d %T "
-
-    ##FUNZIONI
-
-    # CHEATSHEET RAPIDA CMD
-    function cheat {
-            curl cht.sh/\$1
-    }
-    # mkdir and cd into it
-    mcd() { mkdir -p "\$1"; cd "\$1";}
-
-    # PERSONAL ALIAS
-    # fast shut & reboot
-    alias shut="sudo shutdown now"
-    alias reboot="sudo reboot now"
-    #alias ls="exa --icons"
-    # temp dir
-    alias tmpd="cd \$(mktemp -d)"
-    # alias batcat
-    alias cat="batcat"
-    # nala
-    alias nala="sudo nala"
-    # fdfind
-    alias fd="fdfind"
-    # empty trash
-    alias et="rm -rf  ~/.local/share/Trash/* "
-    #Pbcopy/Pbpaste
-    alias pbcopy="xsel --input --clipboard"
-    alias pbpaste="xsel --output --clipboard"
-      
-    export PATH="$PATH:/opt/nvim"
-
-EOF
+  curl -fsSl https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/zshrc -o $HOME/.zshrc
 
 fi
 
