@@ -250,8 +250,12 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
 
   echo "Zsh plugin installation complete!"
 
-  echo "Setting up personal Functions and Alias"
-  curl -fsSl https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/zshrc -o $HOME/.zshrc
+  # Gnome-extensions Configurations need sheel reload to take effect (CTRL+F2   reload) 
+  echo "Setup Gnome-extensions configuration"
+  mkdir -p $HOME/.local/share/gnome-shell/extensions/
+  cd && cd Linux2.24/config/extensions
+  cp -r * $HOME/.local/share/gnome-shell/extensions
+  cd $HOME 
 
 fi
 
