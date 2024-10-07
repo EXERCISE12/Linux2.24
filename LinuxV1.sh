@@ -295,9 +295,7 @@ if [[ "$OS" == "Linux" ]] || [[ "$OS" == "Darwin" ]]; then
 
   echo "Zsh plugin installation complete!"
 
-  echo "Setting up personal Functions and Alias"
-
-  echo "Setting up personal Functions and Alias"
+  echo "Setting up zsh profile"
   curl -fsSl https://raw.githubusercontent.com/EXERCISE12/Linux2.24/main/config/zshrc -o $HOME/.zshrc
 
 
