@@ -114,7 +114,7 @@ alias et="rm -rf  ~/.local/share/Trash/* "
 #Apre doc lavoro automaticamente
 alias doc="xdg-open ~/Documents/Importanti/P.txt && xdg-open ~/Documents/Importanti/Info_Utili.txt && xdg-open ~/Documents/Importanti/Link_Utili.txt"
 # Color ls output
-alias ls="eza --icons"
+alias ls="exa --icons"
 #mkdir and cd into it
 mcd() { mkdir -p "$1"; cd "$1";}
 #alias apt-log view
