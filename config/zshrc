@@ -117,16 +117,8 @@ alias doc="xdg-open ~/Documents/Importanti/P.txt && xdg-open ~/Documents/Importa
 alias ls="eza --icons"
 #mkdir and cd into it
 mcd() { mkdir -p "$1"; cd "$1";}
-# Chrome script + programmi lavoro
-alias work="./Documents/scripts/workstdV3.sh"
-#rsync outbound.py
-alias rout="./Documents/scripts/out.sh"
 #alias apt-log view
 alias aptlog="tail -2 ~/Documents/scripts/apt_log/log.txt"
-#alias Numerazioni Registrate
-alias numerazioni="gnome-text-editor ~/Documents/Creazione_Campagne/numerazione_campagne"
-#alias template_utenze
-alias utz="gnome-text-editor ~/Documents/Utenze/template_credenziali_utenti.txt"
 #nano
 alias e="nano "
 #ssh 26
@@ -143,10 +135,6 @@ alias nala="sudo nala"
 alias fd="fdfind"
 #ncdu
 alias du="ncdu"
-#passwd gen
-alias npass="~/Documents/scripts/passwd_gen.sh"
-#Prompt Utenze
-alias promptu="~/Documents/scripts/prompt_utenzeV4.sh"
 #Pbcopy/Pbpaste
 alias pbcopy="xsel --input --clipboard"
 alias pbpaste="xsel --output --clipboard"
